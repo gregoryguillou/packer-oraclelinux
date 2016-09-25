@@ -5,24 +5,25 @@ import subprocess
 
 def usage():
     print("""
-VM-GENERATE()                                                     VM-GENERATE()
+KICKSTART-VM()                                                    KICKSTART-VM()
 
 NAME
-     vm-generate.py - build a Virtual Machine from an ISO file
+     kickstart-vm.py - build a Virtual Machine from an ISO
 
 DESCRIPTION
 
-     this Python scripts relies on packer.io and a type-2 hypervisor to create
-     and save a virtual machine from an ISO file.
+     This Python scripts relies on packer.io and a type-2 hypervisor (Usually 
+     Virtualbox but could be VMWare Workstation) as well as a Kickstart file
+     to create and save a virtual machine OVA/VMDK.
 
 SYNOPSIS
 
-     vm-generate.py [-h] [-v] [-n {hostname}] [-t {template_name}]
+     kickstart-vm.py [-h] [-v] [-n {hostname}] [-t {template_name}]
 
 OPTIONS
 
      -h, --help
-     displays generate-vm.py usage and help
+     displays kickstart-vm.py usage and help
 
      -v, --verbose
      runs in verbose mode
@@ -38,7 +39,7 @@ OPTIONS
 
 PRE-REQUISITES
 
-     Packer.io 0.8.6+ as well as the type-2 hypervisor, aka Virtualbox, VMWare
+     Packer.io 0.10.1+ as well as a type-2 hypervisor, aka Virtualbox, VMWare
      Workstation Pro must be installed and part of the current PATH in order
      for the script to work as expected. Your host must also be connected to the
      Internet; this is because the latest RPMs are updated from
@@ -49,7 +50,7 @@ HISTORY
 
      2016 -- written by Gregory P. Guillou (gregory.guillou@resetlogs.com)
 
-VM-GENERATE()                                                     VM-GENERATE()
+KICKSTART-VM()                                                    KICKSTART-VM()
           """);
 
 def main():

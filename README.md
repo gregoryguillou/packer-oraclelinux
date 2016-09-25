@@ -28,6 +28,6 @@ REPO_URL=http://10.0.2.2/repo
 The command below shows how to use the script:
 
 ```
-./vm-generate.py -t vbox-ol72 -n purple
+./kickstart-vm.py -t vbox-ol72 -n purple
 ```
 
