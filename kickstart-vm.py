@@ -81,6 +81,7 @@ def main():
 
     pid = os.getpid();
     os.environ["PID"] = str(pid)
+    os.environ["PROJECT_HOME"]=os.path.dirname(os.path.realpath(__file__))
     with open('project.properties') as f:
         for line in f:
             k, v = line.split('=')
