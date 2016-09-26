@@ -109,13 +109,13 @@ def main():
                 except IOError as e:
                     with open("tmp/"+str(pid)+"/"+scripts[i][1], "wt") as newscript_file:
                         for line in script_file:
-                            newline=newline.replace('{OS_DISTRIBUTION}', os.environ['OS_DISTRIBUTION'])
+                            newline=line.replace('{OS_DISTRIBUTION}', os.environ['OS_DISTRIBUTION'])
                             newscript_file.write(newline)
 
     with open("templates/"+template+"/vm.json", "rt") as read_file:
         with open("tmp/"+str(pid)+"/vm.json", "wt") as write_file:
             for line in read_file:
-                newline=newline.replace('{OS_DISTRIBUTION}', os.environ['OS_DISTRIBUTION'])
+                newline=line.replace('{OS_DISTRIBUTION}', os.environ['OS_DISTRIBUTION'])
                 for i in range(0,2):
                     newline=newline.replace(scripts[i][0],"tmp/"+str(pid)+"/"+scripts[i][1])
                 write_file.write(newline)
