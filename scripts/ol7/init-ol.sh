@@ -35,7 +35,7 @@ yum install -y cloud-init
 sed -i 's/name: fedora/name: ec2-user/g' /etc/cloud/cloud.cfg
 sed -i 's/gecos: Fedora Cloud User/gecos: EC2 Cloud User/g' /etc/cloud/cloud.cfg
 sed -i 's/distro: fedora/distro: rhel/g' /etc/cloud/cloud.cfg
-sed -i 's/lock_passwd: true/lock_passwd: false/g' /etc/cloud/cloud.cfg
+# sed -i 's/lock_passwd: true/lock_passwd: false/g' /etc/cloud/cloud.cfg
 
 #
 cat /etc/oracle-release
@@ -43,4 +43,7 @@ cat /etc/oracle-release
 #
 sed -i 's/Defaults\ \ \ \ requiretty/Defaults   !requiretty/' /etc/sudoers
 sed -i 's/Defaults\ \ \ !visiblepw/Defaults    visiblepw/' /etc/sudoers
+
+#
+systemctl disable kdump.service
 

@@ -1,0 +1,43 @@
+{
+   "variables": {
+      "vm_name": "red.resetlogs.com",
+      "http_directory": "tmp",
+      "iso_url": "file://{{env `OS_DISTRIBUTION`}}",
+      "iso_checksum": "3b9d65d26576921372b1b35b03fd791d",
+      "ks_file": "ol72-ks.cfg",
+      "script1": "scripts/ol7/init-ol.sh",
+      "script2": "scripts/ol7/null.sh"
+   },
+   "builders": [{
+      "type": "vmware-iso",
+      "vm_name": "{{user `vm_name`}}",
+      "disk_size": "32768",
+      "disk_additional_size": [ "10240", "10240" ],
+      "guest_os_type": "oraclelinux-64",
+      "iso_url": "{{user `iso_url`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "md5",
+      "vmx_data": {
+        "memsize": "4096",
+        "numvcpus": "2"
+      },
+      "ssh_username": "root",
+      "ssh_password": "manager",
+      "ssh_wait_timeout": "20m",
+      "boot_wait": "10s",
+      "http_directory": "{{user `http_directory`}}",
+      "boot_command": [
+               "<esc><wait5>",
+               "vmlinuz initrd=initrd.img ",
+               "ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `ks_file`}} ",
+               "biosdevname=0 net.ifnames=0",
+               "<enter>" 
+      ],
+      "shutdown_command": "shutdown -P now",
+      "output_directory": "dist/{{user `vm_name`}}"
+   }],
+   "provisioners": [{
+      "type": "shell", 
+      "scripts": [ "{{user `script1`}}", "{{user `script2`}}" ]
+   }]
+}
