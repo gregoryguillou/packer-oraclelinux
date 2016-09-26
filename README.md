@@ -29,6 +29,6 @@ OS_DISTRIBUTION=/home/gregory/distribs/V100082-01.iso
 Here is an example of how to create a VM:
 
 ```
-./kickstart-vm.py -t vbox-ol72 -n locathost
+./kickstart-vm.py -t vbox-ol72 -n localhost
 ```
 
