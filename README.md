@@ -22,13 +22,25 @@ OS_DISTRIBUTION=/home/gregory/distribs/V100082-01.iso
 
 ## Building a VM
 
-```kickstart-vm``` creates an instance and store it in the ```dist``` directory of the project. It requires 2 parameters below:
+```kickstartvm.py``` creates an instance and store it in the ```dist``` directory of the project. It requires 2 parameters:
 - ```-t``` defines the template name and it should be vbox-ol72 or vmware-ol72
 - ```-n``` defines the VM name. You might want to use ```-n localhost```
 
 Here is an example of how to create a VM:
 
 ```
-./kickstart-vm.py -t vbox-ol72 -n localhost
+./kickstartvm.py -t vbox-ol72 -n localhost
+```
+
+## Building an AMI from an .ova file
+
+```createami.py``` creates an AMI from a .ova file. It requires 2 parameters:
+- ```-f``` defines the .ova file
+- ```-b``` defines the AWS bucket to use to perform the upload.
+
+Here is an example of how to create a AMI from a previously created template:
+
+```
+./createami.py -f dist/localhost/localhost.ova -b resetlogs
 ```
 

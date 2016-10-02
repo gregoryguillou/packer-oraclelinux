@@ -47,3 +47,6 @@ sed -i 's/Defaults\ \ \ !visiblepw/Defaults    visiblepw/' /etc/sudoers
 #
 systemctl disable kdump.service
 
+#
+passwd -l root
+
