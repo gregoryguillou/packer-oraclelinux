@@ -1,0 +1,45 @@
+{
+   "variables": {
+      "vm_name": "red.resetlogs.com",
+      "http_directory": "tmp",
+      "iso_url": "file://{{env `OS_DISTRIBUTION`}}",
+      "iso_checksum": "44441a0b53ed4cf40572fc66195fe859",
+      "ks_file": "ol69-ks.cfg",
+      "script1": "scripts/ol6/init-ol.sh",
+      "script2": "scripts/ol6/null.sh"
+   },
+   "builders": [{
+      "type": "virtualbox-iso",
+      "guest_os_type": "Oracle_64",
+      "vm_name": "{{user `vm_name`}}",
+      "vboxmanage": [
+          [ "modifyvm", "{{.Name}}", "--memory", "4096" ],
+          [ "modifyvm", "{{.Name}}", "--cpus", "2" ]
+      ],
+      "disk_size": "8192",
+      "iso_url": "{{user `iso_url`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "md5",
+      "ssh_username": "root",
+      "ssh_password": "manager",
+      "ssh_wait_timeout": "20m",
+      "headless": "true",
+      "boot_wait": "10s",
+      "guest_additions_mode": "disable",
+      "http_directory": "{{user `http_directory`}}",
+      "boot_command": [
+               "<esc><wait5>",
+               "vmlinuz initrd=initrd.img ",
+               "ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{user `ks_file`}} ",
+               "biosdevname=0 net.ifnames=0",
+               "<enter>" 
+      ],
+      "shutdown_command": "shutdown -P now",
+      "format": "ova",
+      "output_directory": "dist/{{user `vm_name`}}"
+   }],
+   "provisioners": [{
+      "type": "shell", 
+      "scripts": [ "{{user `script1`}}", "{{user `script2`}}" ]
+   }]
+}
